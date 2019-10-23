@@ -59,10 +59,9 @@ ucihar_load <- function(path)
 ucihar_tidy <- function(ucihar)
 {
   # Reduce data to only those columns containing "std" or "mean", and "Subject.ID" and "Activity.Name"
-  
   features_tidy <- c("Subject.ID", "Activity.Name", grep("std[.]{3}|mean[.]{3}", names(ucihar), value=TRUE));
   
-  ucihar <- select(ucihar, features_tidy);
+  ucihar <- select(ucihar, features_tidy); # (dplyr)
   
   # Rename columns with descriptive names
   features_tidy <- lapply(features_tidy, function(feature) {
@@ -99,10 +98,13 @@ ucihar_tidy <- function(ucihar)
 
 ucihar_summarize <- function(ucihar)
 {
+  # Group the data (dplyr)
   ucihar_grouped <- group_by(ucihar, Subject.ID, Activity.Name);
   
+  # Pick columns to summarize
   features_to_summarize <- names(select(ucihar, -Subject.ID, -Activity.Name))
   
+  # Return columns summarized using mean() (dplyr)
   summarize_at(ucihar_grouped, features_to_summarize, mean, na.rm = TRUE);
 }
 
@@ -121,7 +123,6 @@ run_analysis <- function()
   # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
   ucihar_summarized <- ucihar_summarize(ucihar_tidied);
   
-  # Write data out
-  
+  # Write data out to "ucihar_summary.txt" in current working directory
   write.table(ucihar_summarized, "ucihar_summary.txt", row.name=FALSE);
 }
