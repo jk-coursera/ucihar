@@ -82,6 +82,7 @@ ucihar_tidy <- function(ucihar)
     
     # Feature
     feature <- gsub("Body[.]?", "Body.", feature);
+    feature <- gsub("Gravity[.]?", "Gravity.", feature);
     feature <- gsub("Acc[.]?", "Acceleration.", feature);
     feature <- gsub("Gyro[.]?", "Gyro.", feature);
     feature <- gsub("Jerk[.]?", "Jerk.", feature);
@@ -124,5 +125,3 @@ run_analysis <- function()
   
   write.table(ucihar_summarized, "ucihar_summary.txt", row.name=FALSE);
 }
-
-run_analysis();
