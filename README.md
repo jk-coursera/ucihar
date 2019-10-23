@@ -30,7 +30,9 @@ Performs the following analysis of the UNI HAR Dataset:
 4. Appropriately labels the data set with descriptive variable names.
 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-Assumes the data is available in the folder `./UCI HAR Dataset` relative to the current working directory.
+Assumes the data set is available in the folder `./UCI HAR Dataset` relative to the current working directory.
+
+The result from the analysis (step 5) is written to the file `ucihar_summary.txt` in current working directory.
 
 Parameters:
 
@@ -38,7 +40,7 @@ Parameters:
 
 Returns:
 
-* None
+No return value.
 
 <hr/>
 

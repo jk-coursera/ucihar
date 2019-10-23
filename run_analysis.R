@@ -60,7 +60,7 @@ ucihar_tidy <- function(ucihar)
 {
   # Reduce data to only those columns containing "std" or "mean", and "Subject.ID" and "Activity.Name"
   
-  features_tidy <- c("Subject.ID", grep("std[.]{3}|mean[.]{3}", names(ucihar), value=TRUE), "Activity.Name");
+  features_tidy <- c("Subject.ID", "Activity.Name", grep("std[.]{3}|mean[.]{3}", names(ucihar), value=TRUE));
   
   ucihar <- select(ucihar, features_tidy);
   
@@ -98,9 +98,9 @@ ucihar_tidy <- function(ucihar)
 
 ucihar_summarize <- function(ucihar)
 {
-  ucihar_grouped <- group_by(ucihar, "Subject.ID", "Activity.Name");
+  ucihar_grouped <- group_by(ucihar, Subject.ID, Activity.Name);
   
-  features_to_summarize <- names(select(ucihar, -"Subject.ID", -"Activity.Name"))
+  features_to_summarize <- names(select(ucihar, -Subject.ID, -Activity.Name))
   
   summarize_at(ucihar_grouped, features_to_summarize, mean, na.rm = TRUE);
 }
@@ -115,8 +115,14 @@ run_analysis <- function()
   # 2. Extracts only the measurements on the mean and standard deviation for each measurement.
   # 3. Uses descriptive activity names to name the activities in the data set
   # 4. Appropriately labels the data set with descriptive variable names.
-  ucihar <- ucihar_tidy(ucihar);
+  ucihar_tidied <- ucihar_tidy(ucihar);
+  
+  head(ucihar_tidied, 20);
   
   # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-  ucihar_summarize(ucihar));
+  ucihar_summarized <- ucihar_summarize(ucihar_tidied);
+  
+  head(ucihar_summarized, 20);
 }
+
+run_analysis();
