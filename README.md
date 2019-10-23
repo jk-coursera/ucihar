@@ -4,6 +4,11 @@
 
 `run_analysis.R` is an R script that contains functions for working with [UCI's Human Activity Recognition Using Smartphones Dataset](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
 
+## Example
+
+    > source("run_analysis.R"); # Load the script from the current working directory
+    > run_analysis(); # Run the analysis.
+
 ## Dependencies
 
 ### UCI HAR Dataset
