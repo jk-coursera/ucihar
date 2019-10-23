@@ -117,12 +117,12 @@ run_analysis <- function()
   # 4. Appropriately labels the data set with descriptive variable names.
   ucihar_tidied <- ucihar_tidy(ucihar);
   
-  head(ucihar_tidied, 20);
-  
   # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
   ucihar_summarized <- ucihar_summarize(ucihar_tidied);
   
-  head(ucihar_summarized, 20);
+  # Write data out
+  
+  write.table(ucihar_summarized, "ucihar_summary.txt", row.name=FALSE);
 }
 
 run_analysis();
